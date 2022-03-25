@@ -31,11 +31,13 @@ Practice writing about code by creating a tutorial that explains how a specific 
 
 ## **Things I learned**
 
--   a
--   b  
+-   Regex is fairly complicated, but I believe I learned an intimated amount of knowledge about what each of the criteria meta-characters mean, especially when it comes to lazy quanitifiers as far as fewest possible and most occurences.
+-   I learned that not only README's can take advantage of the markdown language if they're an .md file.
     <br/>
 
 ## **What makes this project stand out?**
+
+I really spent a lot of time thinking from the aspect of a true novice coder. This was hard because I had to learn a significant amount of complex knowledge in order to understand a regex.
 
 <br/>
 
