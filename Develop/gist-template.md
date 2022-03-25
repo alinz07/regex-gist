@@ -1,6 +1,6 @@
 # Breaking Down an Email Regular Expression (regex)
 
-This tutorial will explain the individual components that make up a regular expression that can be used to search text for an email. A regular expression (regex) is a sequence of characters/groups of meta-characters that define a search pattern. These expressions are frequently used in search algorithms, to help parse data and to validate input.
+This tutorial will explain the individual components that make up a regular expression that can be used to search text for an email. A regular expression (regex) is a sequence of characters that define a search pattern. These expressions are frequently used in search algorithms, to help parse data and to validate input.
 
 ## Summary
 
@@ -25,7 +25,7 @@ Before we break down the individual parts, let's sum up, in a ridiculous amount 
 
 ### Anchors
 
-The character directly to the right of the opening forward slash, the circumflex ^, and the character directly to the left of the closing forward slash, the dollar sign $, are the starts-with and ends-with anchors for this expression. These anchors are placed in front of and after the patterns we're searching for that start and end the string, respectively. Our regex says the email address should start and end with a character/s that match the criteria inside the respective pair of parentheses. Anything wrapped inside parentheses is called a group, which we'll discuss soon.
+The character directly to the right of the opening forward slash, the circumflex ^, and the character directly to the left of the closing forward slash, the dollar sign $, are the starts-with and ends-with anchors for this expression. These anchors are placed in front of and after the patterns we're searching for that start and end the string, respectively. Our regex says the email address should start and end with a character/s that match the criteria inside the respective pair of parentheses. Anything wrapped inside parentheses is called a group, which we'll discuss below.
 
 Our anchers and the groups that define the starts-with and ends-with criteria:
 
@@ -34,7 +34,7 @@ starts-with
 ^([a-z0-9_\.-]+)
 
 ends-with
-([a-z\.]{2,6})
+([a-z\.]{2,6})$
 
 full regex
 /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
@@ -89,7 +89,7 @@ The second bracket expression differs because it includes the 'digit' criteria '
 
 ```
 
-The '\d' is a character class that would match a digit. Unicode defines digits as more than just the 10 number keys, 0-9. This means that our second bracket notation would match characters that represent digits outside of the 10 number keys. For example, 'V.' is the unicode for 70 in indic (mirod Stackoverflow.com 5.21.09 https://stackoverflow.com/questions/890686/should-i-use-d-or-0-9-to-match-digits-in-a-perl-regex). We'll cover character classes to come, for now we only need to understand why the second, middle bracket expression is looking for one or more characters that could be a 'digit', letters a through z, periods or hyphens. The middle expression is searching for this pattern in between an '@' symbol and period '\\.'.
+The '\d' is a character class that would match a digit. Unicode defines digits as more than just the 10 number keys, 0-9. This means that our second bracket notation would match characters that represent digits outside of the 10 number keys. For example, 'V.' is the unicode for 70 in indic (mirod Stackoverflow.com 5.21.09 https://stackoverflow.com/questions/890686/should-i-use-d-or-0-9-to-match-digits-in-a-perl-regex). We'll cover character classes below. For now we only need to understand why the second, middle bracket expression is looking for one or more characters that could be a 'digit', letters a through z, periods or hyphens. The middle expression is searching for this pattern in between an '@' symbol and period '\\.'.
 
 Our third bracket expression introduces a new quantifier {2,6}
 
@@ -157,3 +157,15 @@ In conclucsion, the regex above can help search text for emails, and we'll find 
 My name is Tony Linz and I'm a Web Development student at the University of Wisconsin-Madison who enjoys programming in javascript and python. While I was born and raised in the Milwaukee, WI metro area, I spent the last decade soaking in the mountains and ocean in Seattle, WA. I intend to explore the professional tech world that Seattle has to offer after school.
 
 Link to Tony's profile: https://github.com/alinz07
+
+### **Credits**
+
+-   https://www.gavilan.edu/csis/languages/literals.html#:~:text=Literals%20or%20constants%20are%20the,explicit%20constants%20or%20manifest%20constants.
+
+-   https://stackoverflow.com/questions/3512471/what-is-a-non-capturing-group-in-regular-expressions
+
+-   https://coding-boot-camp.github.io/full-stack/computer-science/regex-tutorial
+
+-   https://regexr.com/
+
+-   https://medium.com/factory-mind/regex-tutorial-a-simple-cheatsheet-by-examples-649dc1c3f285
