@@ -10,7 +10,7 @@ This tutorial will detail the individual components that make up a regular expre
 
 The regex above consists of anchors, captured groups, bracket expressions, and quantifiers and is used to search text for patterns that match a standard email address. All of these elements must be wrapped in forward slashes because without them, regexs would be interpreted as literals by the code editor. A literal, in this context, is a series of conventional characters with obvious values. Without forward slashes, '^' would literally be interpreted as a circumflex, and 'a-z' as 'a hyphen z'. With the forward slashes, the code editor reads our input as a regex, which assigns meaning to certain literal characters/combinations of them.
 
-Before we break down the individual parts, let's sum up, in a ridiculous amount of words, what this regex is doing. We are searching text for emails and we'll find emails by looking for patterns that start with one or more characters a-z, 0-9, and \_ . or -, followed by an '@', followed by one or more digits, letters a-z, . or hyphen, followed by a period '\.', followed by 2 to 6 letters a-z or periods '\.'. If that's all you need, congratulations, you're a savant. For the rest of, let's break this down.
+Before we break down the individual parts, let's sum up, in a ridiculous amount of words, what this regex is doing. We are searching text for emails, and we'll find emails by looking for patterns that start with one or more characters a-z, 0-9, an underscore, period or hyphen, followed by an '@' symbol, followed by one or more digits, letters a-z, period or hyphen, followed by a period '\\.', followed by 2 to 6 letters a-z or periods '\.'. If that's all you need, congratulations, you're a savant. For the rest of, let's break this down.
 
 ## Table of Contents
 
@@ -19,6 +19,7 @@ Before we break down the individual parts, let's sum up, in a ridiculous amount 
 -   [Bracket Expressions](#bracket-expressions)
 -   [Quantifiers](#quantifiers)
 -   [Character Classes](#character-classes)
+-   [Conclusion](#conclusion)
 
 ## Regex Components
 
@@ -40,25 +41,25 @@ Our email regex has both a starts-with and ends-with anchor next to grouped brac
 full regex
 /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
 
-bracket expression by the starts with anchor (enclosed in a group () and with a quantifier +)
+bracket expression by the starts-with anchor (enclosed in a group () and with a quantifier +)
 ^([a-z0-9_\.-]+)
 
-bracket expression by the end with anchor (enclosed in a group () and with a quantifier {2,6})
+bracket expression by the ends-with anchor (enclosed in a group () and with a quantifier {2,6})
 ([a-z\.]{2,6})$
 ```
 
-At this point, it's good to note there is a group to the right of the starts-with anchor, followed by an '@' symbol, followed by another group, followed by a '\.' (we used the backslash to escape the literal and indicate we literally mean we want a period) followed by a third group to the left of the ends-with anchor. In terms of an email that we're used to seeing, think of it as 'group@group.group'. Each group has certain criteria defined in the bracket expressions. Our regex searches for strings that match the entire pattern.
+At this point, it's good to note there is a group to the right of the starts-with anchor, followed by an '@' symbol, followed by another group, followed by a '\\.' (we usedthe backslash to escape the literal and indicate we literally mean we want a period) followed by a third group to the left of the ends-with anchor. In terms of an email that we're used to seeing, think of it as 'group@group.group'. Each group has certain criteria defined in the bracket expressions. Our regex searches for strings that match the entire regex pattern.
 
 ### Grouping and Capturing
 
-Grouping is done with parentheses '()' to help break up complex sections of regexs when searching a string for different requirements, and the email regex has three groups that we capture. The two bracket expressions discussed directly above and wrapped in parentheses are groups, as well as a third one in the middle that comes after the '@' character and before the '\.':
+Grouping is done with parentheses '()' to help break up complex sections of regexs when searching a string for different requirements, and the email regex has three groups that we capture. The two bracket expressions discussed directly above are wrapped in parentheses are groups, as well as a third one in the middle that comes after the '@' character and before the '\\.':
 
 ```
 middle group
 ([\da-z\.-]+)
 ```
 
-Grouping and capturing is useful because we can extract and reference exact information from a bigger match, we can rematch a previous matched group and we can also implement substitutions on groups to replace data. If, for whatever reason, you only wanted to capture the first and third groups from our regex to reference that data later, then you could use a '?:' to not capture the second group. While we won't go over capturing in detail, for the purposes of this tutorial it's important to notice the three groups in our regex because they make up the standard email format we are used to:
+Grouping and capturing is useful because we can extract and reference exact information from a bigger match, we can rematch a previous matched group and we can also implement substitutions on groups to replace data. If, for whatever reason, you only wanted to capture the first and third groups from our regex to reference that data later, then you could add a '?:' to the right of the left parenthesis to not capture the second group. While we won't go over capturing in detail, for the purposes of this tutorial it's important to notice the three groups in our regex because they make up the standard email format we are used to:
 
 ```
 
@@ -88,7 +89,7 @@ The second bracket expression differs because it includes the 'digit' criteria '
 
 ```
 
-The '\d' is a character class that would match a digit. Unicode defines digits as more than just the 10 number keys, 0-9. This means that our second bracket notation would match characters that represent digits outside of the 10 number keys. For example, 'V.' is the unicode for 70 in indic (mirod Stackoverflow.com 5.21.09 https://stackoverflow.com/questions/890686/should-i-use-d-or-0-9-to-match-digits-in-a-perl-regex). We'll cover character classes to come, but just know that the second, middle bracket expression, that is also grouped in parentheses, is looking for one or more characters that could be a 'digit', letter a through z, or a period or hyphen. The middle expression is searching for this pattern in between an '@' symbol and period '\.'.
+The '\d' is a character class that would match a digit. Unicode defines digits as more than just the 10 number keys, 0-9. This means that our second bracket notation would match characters that represent digits outside of the 10 number keys. For example, 'V.' is the unicode for 70 in indic (mirod Stackoverflow.com 5.21.09 https://stackoverflow.com/questions/890686/should-i-use-d-or-0-9-to-match-digits-in-a-perl-regex). We'll cover character classes to come, but just know that the second, middle bracket expression, also grouped in parentheses, is looking for one or more characters that could be a 'digit', letter a through z, or a period or hyphen. The middle expression is searching for this pattern in between an '@' symbol and period '\.'.
 
 Our third bracket expression introduces a new quantifier {2,6}
 
@@ -98,7 +99,7 @@ Our third bracket expression introduces a new quantifier {2,6}
 
 ```
 
-This quantifier specifies the number of characters we're looking for that match the bracket expression criteria. We're searching a string for 2-6 characters, and these characters could be the letter a-z or a period '\,'.
+This quantifier specifies the number of characters we're looking for that match the bracket expression criteria. We're searching a string for 2-6 characters, and these characters could be the letter a-z or a period '\.'.
 
 ### Quantifiers
 
@@ -139,6 +140,14 @@ You want to use the result as a number (such as performing mathematical operatio
 It is possible non-digits [^0-9] would be present in the data in such a way that the regular expression could match them. (Note that this one should always be considered true for untrusted/hostile input.)
 
 If either of these are false, there will only rarely be reason to specifically not use \d (and you'll probably be able to tell when that is the case), and if you're trying to match all unicode-defined digits, you'll definitely want to use \d." (5.20.09 https://stackoverflow.com/questions/890686/should-i-use-d-or-0-9-to-match-digits-in-a-perl-regex)
+
+## Conclusion
+
+```
+/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
+```
+
+Once again, the above regex can help search text for emails, and we'll find emails by looking for patterns that start with one or more characters a-z, 0-9, an underscore, period or hyphen, followed by an '@' symbol, followed by one or more digits, letters a-z, period or hyphen, followed by a period '\.', followed by 2 to 6 letters a-z or periods '\\.'.
 
 ## Author
 
