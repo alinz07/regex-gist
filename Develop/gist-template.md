@@ -48,11 +48,11 @@ Anchors can be placed adjacent to exact characters to indicate the string should
 
 looks for a pattern of characters that exactly starts with 'The', has a space in-between, and ends with 'end' and is case sensitive.
 
-Let's take a pause to note that our bracket expression has three groups; two of which are next to the anchors. There is a group to the right of the starts-with anchor, followed by an '@' symbol, followed by another group, followed by a '\\.' (we use the backslash to escape the literal and indicate we literally mean the pattern can contain a period) followed by a third group to the left of the ends-with anchor. This pattern matches the way we see most standard email addresses: 'group@group.group'. Each group has certain criteria defined in the bracket expressions, and our regex searches for strings that match the entire regex pattern.
+Let's take a pause to note that our bracket expression has three groups; two of which are next to the anchors. There is a group to the right of the starts-with anchor, followed by an '@' symbol, followed by another group, followed by a '\\.' (we use the backslash to escape the literal and indicate we literally mean the pattern must contain a period there) followed by a third group to the left of the ends-with anchor. This pattern matches the way we see most standard email addresses: 'group@group.group'. Each group has certain criteria defined in the bracket expressions, and our regex searches for strings that match the entire regex pattern.
 
 ### Grouping and Capturing
 
-Grouping is done with parentheses '()' to help break up complex sections of regexs when searching a string for different requirements, and the email regex has three groups that we capture. The two groups next to our anchors and shown above are wrapped in parentheses to indicate a group, and there's a third group in the middle that comes after the '@' character and before the '\\.':
+Grouping is done with parentheses '()' to help break up complex sections of regexs when searching a string for different requirements, and the email regex has three groups that we capture. The two groups next to our anchors, and shown above, are wrapped in parentheses to indicate a group, and there's a third group in the middle that comes after the '@' character and before the '\\.':
 
 ```
 middle group
